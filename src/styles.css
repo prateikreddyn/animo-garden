@@ -133,6 +133,14 @@
   --sidebar-accent-foreground: oklch(0.96 0.01 90);
   --sidebar-border: oklch(1 0 0 / 16%);
   --sidebar-ring: oklch(0.72 0.11 155);
+  --sky: oklch(0.45 0.05 220);
+  --bloom: oklch(0.68 0.12 20);
+  --leaf: oklch(0.6 0.11 150);
+  --sun: oklch(0.8 0.13 88);
+  --gradient-sky: linear-gradient(180deg, oklch(0.26 0.025 235), oklch(0.24 0.02 80));
+  --gradient-warm: linear-gradient(135deg, oklch(0.32 0.04 90), oklch(0.3 0.04 150));
+  --shadow-soft: 0 6px 24px -8px oklch(0.1 0.02 70 / 0.6);
+  --shadow-lift: 0 14px 40px -14px oklch(0.1 0.02 70 / 0.7);
 }
 
 @theme inline {
