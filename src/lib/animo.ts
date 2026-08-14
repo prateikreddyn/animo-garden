@@ -43,6 +43,7 @@ export type AnimoState = {
   points: number;
   largeText: boolean;
   voiceOn: boolean;
+  darkMode: boolean;
 };
 
 const KEY = "animo-state-v1";
@@ -123,6 +124,7 @@ export const defaultState: AnimoState = {
   points: 120,
   largeText: false,
   voiceOn: true,
+  darkMode: false,
 };
 
 function read(): AnimoState {

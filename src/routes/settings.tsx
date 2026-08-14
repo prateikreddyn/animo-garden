@@ -72,6 +72,12 @@ function SettingsPage() {
           on={state.voiceOn}
           onChange={(v) => update((s) => ({ ...s, voiceOn: v }))}
         />
+        <Toggle
+          label="Evening mode"
+          hint="Softer, darker colours that are easy on the eyes at night."
+          on={state.darkMode}
+          onChange={(v) => update((s) => ({ ...s, darkMode: v }))}
+        />
       </div>
 
       <BigCard className="mt-5">

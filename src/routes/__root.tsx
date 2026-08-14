@@ -129,6 +129,11 @@ function RootComponent() {
     document.documentElement.classList.toggle("animo-large", state.largeText);
   }, [state.largeText]);
 
+  useEffect(() => {
+    document.documentElement.classList.toggle("dark", state.darkMode);
+    document.documentElement.style.colorScheme = state.darkMode ? "dark" : "light";
+  }, [state.darkMode]);
+
   return (
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
