@@ -10,33 +10,180 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AddPillRouteImport } from './routes/add-pill'
+import { Route as CaregiverRouteImport } from './routes/caregiver'
+import { Route as ChatRouteImport } from './routes/chat'
+import { Route as CompanionRouteImport } from './routes/companion'
+import { Route as FamilyRouteImport } from './routes/family'
+import { Route as HomeRouteImport } from './routes/home'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as MedicinesRouteImport } from './routes/medicines'
+import { Route as ReminderRouteImport } from './routes/reminder'
+import { Route as RewardsRouteImport } from './routes/rewards'
+import { Route as ScanRouteImport } from './routes/scan'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AddPillRoute = AddPillRouteImport.update({
+  id: '/add-pill',
+  path: '/add-pill',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CaregiverRoute = CaregiverRouteImport.update({
+  id: '/caregiver',
+  path: '/caregiver',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ChatRoute = ChatRouteImport.update({
+  id: '/chat',
+  path: '/chat',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CompanionRoute = CompanionRouteImport.update({
+  id: '/companion',
+  path: '/companion',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FamilyRoute = FamilyRouteImport.update({
+  id: '/family',
+  path: '/family',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HomeRoute = HomeRouteImport.update({
+  id: '/home',
+  path: '/home',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MedicinesRoute = MedicinesRouteImport.update({
+  id: '/medicines',
+  path: '/medicines',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReminderRoute = ReminderRouteImport.update({
+  id: '/reminder',
+  path: '/reminder',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RewardsRoute = RewardsRouteImport.update({
+  id: '/rewards',
+  path: '/rewards',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ScanRoute = ScanRouteImport.update({
+  id: '/scan',
+  path: '/scan',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/add-pill': typeof AddPillRoute
+  '/caregiver': typeof CaregiverRoute
+  '/chat': typeof ChatRoute
+  '/companion': typeof CompanionRoute
+  '/family': typeof FamilyRoute
+  '/home': typeof HomeRoute
+  '/login': typeof LoginRoute
+  '/medicines': typeof MedicinesRoute
+  '/reminder': typeof ReminderRoute
+  '/rewards': typeof RewardsRoute
+  '/scan': typeof ScanRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/add-pill': typeof AddPillRoute
+  '/caregiver': typeof CaregiverRoute
+  '/chat': typeof ChatRoute
+  '/companion': typeof CompanionRoute
+  '/family': typeof FamilyRoute
+  '/home': typeof HomeRoute
+  '/login': typeof LoginRoute
+  '/medicines': typeof MedicinesRoute
+  '/reminder': typeof ReminderRoute
+  '/rewards': typeof RewardsRoute
+  '/scan': typeof ScanRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/add-pill': typeof AddPillRoute
+  '/caregiver': typeof CaregiverRoute
+  '/chat': typeof ChatRoute
+  '/companion': typeof CompanionRoute
+  '/family': typeof FamilyRoute
+  '/home': typeof HomeRoute
+  '/login': typeof LoginRoute
+  '/medicines': typeof MedicinesRoute
+  '/reminder': typeof ReminderRoute
+  '/rewards': typeof RewardsRoute
+  '/scan': typeof ScanRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/add-pill'
+    | '/caregiver'
+    | '/chat'
+    | '/companion'
+    | '/family'
+    | '/home'
+    | '/login'
+    | '/medicines'
+    | '/reminder'
+    | '/rewards'
+    | '/scan'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/add-pill'
+    | '/caregiver'
+    | '/chat'
+    | '/companion'
+    | '/family'
+    | '/home'
+    | '/login'
+    | '/medicines'
+    | '/reminder'
+    | '/rewards'
+    | '/scan'
+  id:
+    | '__root__'
+    | '/'
+    | '/add-pill'
+    | '/caregiver'
+    | '/chat'
+    | '/companion'
+    | '/family'
+    | '/home'
+    | '/login'
+    | '/medicines'
+    | '/reminder'
+    | '/rewards'
+    | '/scan'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AddPillRoute: typeof AddPillRoute
+  CaregiverRoute: typeof CaregiverRoute
+  ChatRoute: typeof ChatRoute
+  CompanionRoute: typeof CompanionRoute
+  FamilyRoute: typeof FamilyRoute
+  HomeRoute: typeof HomeRoute
+  LoginRoute: typeof LoginRoute
+  MedicinesRoute: typeof MedicinesRoute
+  ReminderRoute: typeof ReminderRoute
+  RewardsRoute: typeof RewardsRoute
+  ScanRoute: typeof ScanRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +195,99 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/add-pill': {
+      id: '/add-pill'
+      path: '/add-pill'
+      fullPath: '/add-pill'
+      preLoaderRoute: typeof AddPillRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/caregiver': {
+      id: '/caregiver'
+      path: '/caregiver'
+      fullPath: '/caregiver'
+      preLoaderRoute: typeof CaregiverRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/chat': {
+      id: '/chat'
+      path: '/chat'
+      fullPath: '/chat'
+      preLoaderRoute: typeof ChatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/companion': {
+      id: '/companion'
+      path: '/companion'
+      fullPath: '/companion'
+      preLoaderRoute: typeof CompanionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/family': {
+      id: '/family'
+      path: '/family'
+      fullPath: '/family'
+      preLoaderRoute: typeof FamilyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/home': {
+      id: '/home'
+      path: '/home'
+      fullPath: '/home'
+      preLoaderRoute: typeof HomeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/medicines': {
+      id: '/medicines'
+      path: '/medicines'
+      fullPath: '/medicines'
+      preLoaderRoute: typeof MedicinesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reminder': {
+      id: '/reminder'
+      path: '/reminder'
+      fullPath: '/reminder'
+      preLoaderRoute: typeof ReminderRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/rewards': {
+      id: '/rewards'
+      path: '/rewards'
+      fullPath: '/rewards'
+      preLoaderRoute: typeof RewardsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/scan': {
+      id: '/scan'
+      path: '/scan'
+      fullPath: '/scan'
+      preLoaderRoute: typeof ScanRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AddPillRoute: AddPillRoute,
+  CaregiverRoute: CaregiverRoute,
+  ChatRoute: ChatRoute,
+  CompanionRoute: CompanionRoute,
+  FamilyRoute: FamilyRoute,
+  HomeRoute: HomeRoute,
+  LoginRoute: LoginRoute,
+  MedicinesRoute: MedicinesRoute,
+  ReminderRoute: ReminderRoute,
+  RewardsRoute: RewardsRoute,
+  ScanRoute: ScanRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
