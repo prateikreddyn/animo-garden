@@ -11,6 +11,7 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { useAnimo } from "@/lib/animo";
 
 function NotFoundComponent() {
   return (
@@ -122,6 +123,11 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const { state } = useAnimo();
+
+  useEffect(() => {
+    document.documentElement.classList.toggle("animo-large", state.largeText);
+  }, [state.largeText]);
 
   return (
     <QueryClientProvider client={queryClient}>
