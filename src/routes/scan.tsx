@@ -50,6 +50,7 @@ function Scan() {
   const [shot, setShot] = useState<string | null>(null);
   const [score, setScore] = useState(0);
   const [camError, setCamError] = useState(false);
+  const [voiceOpen, setVoiceOpen] = useState(false);
 
   const pill = state.pills.find((p) => p.id === pillId) ?? state.pills[0];
 
