@@ -281,7 +281,15 @@ function Scan() {
             }}
           />
         </label>
-        <BigButton tone="accent" onClick={() => setStage("match")} icon={<Mic className="size-8" />} hint="No camera needed">
+        <BigButton
+          tone="accent"
+          onClick={() => {
+            setVoiceOpen(true);
+            setStage("match");
+          }}
+          icon={<Mic className="size-8" />}
+          hint="No camera needed"
+        >
           Confirm by voice instead
         </BigButton>
       </BigCard>
