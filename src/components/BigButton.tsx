@@ -42,6 +42,7 @@ export function BigButton({
   children,
   hint,
   tone = "primary",
+  className = "",
   ...rest
 }: {
   icon?: ReactNode;
@@ -50,7 +51,7 @@ export function BigButton({
   tone?: Tone;
 } & ComponentProps<"button">) {
   return (
-    <button className={`${base} ${tones[tone]}`} {...rest}>
+    <button className={`${base} ${tones[tone]} ${className}`} {...rest}>
       {icon && <span aria-hidden className="shrink-0">{icon}</span>}
       <span>
         <span className="block">{children}</span>
