@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { AppShell, BigCard } from "@/components/AppShell";
 import { BigButton } from "@/components/BigButton";
 import { Companion } from "@/components/Companion";
+import { VoiceConfirm } from "@/components/VoiceConfirm";
 import {
   MATCH_THRESHOLD,
   compareFingerprints,
@@ -206,13 +207,32 @@ function Scan() {
           {mode !== "voice" && score > 0 && (
             <p className="mt-2 text-base text-muted-foreground">Photo check: {Math.round(score * 100)}% alike</p>
           )}
+
+          {(mode === "voice" || voiceOpen) && (
+            <div className="mt-6 text-left">
+              <VoiceConfirm
+                autoStart={false}
+                question={`Have you taken your ${pill.name}?`}
+                onYes={confirmTaken}
+                onNo={() => navigate({ to: "/medicines" })}
+              />
+            </div>
+          )}
+
           <div className="mt-8 space-y-4">
             <BigButton onClick={confirmTaken} icon={<CheckCircle2 className="size-9" />}>
               Yes, taking it now
             </BigButton>
-            <BigButton tone="soft" onClick={confirmTaken} icon={<Mic className="size-8" />} hint="For tired days">
-              Say it out loud instead
-            </BigButton>
+            {mode !== "voice" && !voiceOpen && (
+              <BigButton
+                tone="soft"
+                onClick={() => setVoiceOpen(true)}
+                icon={<Mic className="size-8" />}
+                hint="For tired days"
+              >
+                Say it out loud instead
+              </BigButton>
+            )}
             <Link
               to="/medicines"
               className="flex min-h-16 w-full items-center justify-center rounded-3xl text-xl font-semibold text-muted-foreground"
