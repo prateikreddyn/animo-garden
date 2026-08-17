@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Heart, Phone } from "lucide-react";
 import { useEffect } from "react";
 import { AppShell, BigCard } from "@/components/AppShell";
-import { useAnimo } from "@/lib/animo";
+import { caregiverLabel, useAnimo } from "@/lib/animo";
 
 export const Route = createFileRoute("/family")({
   head: () => ({
@@ -53,10 +53,30 @@ function Family() {
           <div>
             <h2 className="text-2xl font-semibold">Hearing a voice is even nicer</h2>
             <p className="mt-1 text-lg">
-              {state.caregiverName} would love a call. Animo is good company, but never a replacement for people.
+              Any of them would love a call. Animo is good company, but never a replacement for people.
             </p>
           </div>
         </div>
+        <ul className="mt-5 space-y-3">
+          {state.caregivers.map((c) => (
+            <li key={c.id}>
+              <a
+                href={c.phone ? `tel:${c.phone.replace(/[^0-9+]/g, "")}` : undefined}
+                className="flex min-h-20 items-center justify-between gap-4 rounded-2xl bg-background px-5 py-4 text-foreground"
+              >
+                <span>
+                  <span className="block text-xl font-semibold">{c.name}</span>
+                  <span className="block text-base text-muted-foreground">{c.relation}</span>
+                </span>
+                <span className="flex items-center gap-2 text-lg font-semibold text-primary">
+                  <Phone aria-hidden className="size-6" />
+                  {c.phone ? "Call" : "No number yet"}
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+        <p className="sr-only">{state.caregivers.map(caregiverLabel).join(", ")}</p>
       </BigCard>
     </AppShell>
   );

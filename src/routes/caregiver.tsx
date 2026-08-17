@@ -24,6 +24,8 @@ function Caregiver() {
   const taken = due.filter((d) => d.taken).length;
   const [note, setNote] = useState("");
   const [sent, setSent] = useState(false);
+  const [senderId, setSenderId] = useState<string | null>(null);
+  const sender = state.caregivers.find((c) => c.id === senderId) ?? state.caregivers[0];
 
   const avg = Math.round(week.reduce((a, d) => a + d.pct, 0) / (week.length || 1));
 
@@ -41,6 +43,21 @@ function Caregiver() {
           </BigCard>
         ))}
       </div>
+
+      <BigCard className="mt-5">
+        <h2 className="text-2xl font-semibold">Care team</h2>
+        <ul className="mt-4 grid gap-3 sm:grid-cols-2">
+          {state.caregivers.map((c) => (
+            <li key={c.id} className="rounded-2xl bg-secondary px-5 py-4">
+              <p className="text-xl font-semibold">{c.name}</p>
+              <p className="text-base text-muted-foreground">
+                {c.relation}
+                {c.phone ? ` · ${c.phone}` : ""}
+              </p>
+            </li>
+          ))}
+        </ul>
+      </BigCard>
 
       <BigCard className="mt-5">
         <h2 className="text-2xl font-semibold">Last 7 days</h2>
@@ -80,6 +97,27 @@ function Caregiver() {
 
       <BigCard className="mt-5">
         <h2 className="text-2xl font-semibold">Send some encouragement</h2>
+        <p className="mt-3 text-lg text-muted-foreground">Who's writing?</p>
+        <div className="mt-3 flex flex-wrap gap-3">
+          {state.caregivers.map((c) => {
+            const active = sender?.id === c.id;
+            return (
+              <button
+                key={c.id}
+                type="button"
+                aria-pressed={active}
+                onClick={() => {
+                  setSenderId(c.id);
+                  setSent(false);
+                }}
+                className={`min-h-16 rounded-2xl border-2 px-5 text-lg font-semibold ${active ? "border-primary bg-primary text-primary-foreground" : "border-input bg-background"}`}
+              >
+                {c.name}
+                <span className="block text-sm font-normal opacity-80">{c.relation}</span>
+              </button>
+            );
+          })}
+        </div>
         <label htmlFor="note" className="sr-only">
           Your message
         </label>
@@ -100,7 +138,12 @@ function Caregiver() {
                 ...s,
                 points: s.points + 5,
                 messages: [
-                  { id: uid(), from: `${s.caregiverName} (family)`, text: note.trim(), at: Date.now() },
+                  {
+                    id: uid(),
+                    from: sender ? `${sender.name} (${sender.relation.toLowerCase()})` : `${s.caregiverName} (family)`,
+                    text: note.trim(),
+                    at: Date.now(),
+                  },
                   ...s.messages,
                 ],
               }));
