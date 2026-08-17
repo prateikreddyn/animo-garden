@@ -1,7 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { AppShell, BigCard } from "@/components/AppShell";
-import { useAnimo } from "@/lib/animo";
+import { BigButton } from "@/components/BigButton";
+import { caregiverNames, uid, useAnimo } from "@/lib/animo";
 
 export const Route = createFileRoute("/settings")({
   head: () => ({
@@ -50,6 +51,88 @@ function Toggle({
   );
 }
 
+function CareTeam() {
+  const { state, update } = useAnimo();
+  const [name, setName] = useState("");
+  const [relation, setRelation] = useState("");
+  const [phone, setPhone] = useState("");
+
+  return (
+    <BigCard className="mt-5">
+      <h2 className="text-2xl font-semibold">Care team</h2>
+      <p className="mt-2 text-lg text-muted-foreground">
+        Everyone here can see whether doses were logged, and send you a note.
+      </p>
+      <ul className="mt-4 space-y-3">
+        {state.caregivers.map((c) => (
+          <li key={c.id} className="flex items-center justify-between gap-4 rounded-2xl bg-secondary px-5 py-4">
+            <span>
+              <span className="block text-xl font-semibold">{c.name}</span>
+              <span className="block text-base text-muted-foreground">
+                {c.relation}
+                {c.phone ? ` · ${c.phone}` : ""}
+              </span>
+            </span>
+            {state.caregivers.length > 1 && (
+              <button
+                type="button"
+                onClick={() => update((s) => ({ ...s, caregivers: s.caregivers.filter((x) => x.id !== c.id) }))}
+                className="min-h-14 rounded-2xl border-2 border-input px-5 text-lg font-semibold"
+              >
+                Remove
+              </button>
+            )}
+          </li>
+        ))}
+      </ul>
+
+      <div className="mt-5 grid gap-3 sm:grid-cols-3">
+        <input
+          aria-label="Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          placeholder="Name"
+          className="min-h-16 w-full rounded-2xl border-2 border-input bg-background px-5 text-xl"
+        />
+        <input
+          aria-label="Relationship"
+          value={relation}
+          onChange={(e) => setRelation(e.target.value)}
+          placeholder="Son, nurse, friend"
+          className="min-h-16 w-full rounded-2xl border-2 border-input bg-background px-5 text-xl"
+        />
+        <input
+          aria-label="Phone number"
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
+          placeholder="Phone (optional)"
+          className="min-h-16 w-full rounded-2xl border-2 border-input bg-background px-5 text-xl"
+        />
+      </div>
+      <div className="mt-4">
+        <BigButton
+          tone="soft"
+          onClick={() => {
+            if (!name.trim()) return;
+            update((s) => ({
+              ...s,
+              caregivers: [
+                ...s.caregivers,
+                { id: uid(), name: name.trim(), relation: relation.trim() || "Family", phone: phone.trim() || undefined },
+              ],
+            }));
+            setName("");
+            setRelation("");
+            setPhone("");
+          }}
+        >
+          Add to care team
+        </BigButton>
+      </div>
+    </BigCard>
+  );
+}
+
 function SettingsPage() {
   const { state, update } = useAnimo();
 
@@ -80,10 +163,12 @@ function SettingsPage() {
         />
       </div>
 
+      <CareTeam />
+
       <BigCard className="mt-5">
         <h2 className="text-2xl font-semibold">Your privacy</h2>
         <p className="mt-2 text-lg text-muted-foreground">
-          Pill photos stay on this device. {state.caregiverName} only ever sees whether a dose was logged — no
+          Pill photos stay on this device. {caregiverNames(state)} only ever see whether a dose was logged — no
           photos, no location, no conversations with Animo.
         </p>
       </BigCard>
