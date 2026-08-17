@@ -118,7 +118,12 @@ function CareTeam() {
               ...s,
               caregivers: [
                 ...s.caregivers,
-                { id: uid(), name: name.trim(), relation: relation.trim() || "Family", phone: phone.trim() || undefined },
+                {
+                  id: uid(),
+                  name: name.trim(),
+                  relation: relation.trim() || "Family",
+                  ...(phone.trim() ? { phone: phone.trim() } : {}),
+                },
               ],
             }));
             setName("");
