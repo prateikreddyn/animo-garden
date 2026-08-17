@@ -30,12 +30,20 @@ export type FamilyMessage = {
   read?: boolean;
 };
 
+export type Caregiver = {
+  id: string;
+  name: string;
+  relation: string;
+  phone?: string;
+};
+
 export type ChatMessage = { id: string; role: "user" | "animo"; text: string; at: number };
 
 export type AnimoState = {
   onboarded: boolean;
   name: string;
   caregiverName: string;
+  caregivers: Caregiver[];
   pills: Pill[];
   logs: DoseLog[];
   messages: FamilyMessage[];
@@ -67,6 +75,11 @@ export const defaultState: AnimoState = {
   onboarded: false,
   name: "Friend",
   caregiverName: "Maria",
+  caregivers: [
+    { id: "cg1", name: "Maria", relation: "Daughter", phone: "555-0142" },
+    { id: "cg2", name: "Tom", relation: "Grandson", phone: "555-0177" },
+    { id: "cg3", name: "Sofia", relation: "Neighbour & nurse", phone: "555-0119" },
+  ],
   pills: [
     {
       id: "p1",
@@ -132,7 +145,12 @@ function read(): AnimoState {
   try {
     const raw = window.localStorage.getItem(KEY);
     if (!raw) return defaultState;
-    return { ...defaultState, ...(JSON.parse(raw) as AnimoState) };
+    const parsed = { ...defaultState, ...(JSON.parse(raw) as AnimoState) };
+    if (!Array.isArray(parsed.caregivers) || parsed.caregivers.length === 0) {
+      parsed.caregivers = [{ id: "cg1", name: parsed.caregiverName || "Maria", relation: "Family" }];
+    }
+    parsed.caregiverName = parsed.caregivers[0]!.name;
+    return parsed;
   } catch {
     return defaultState;
   }
@@ -159,6 +177,22 @@ export function useAnimo() {
   }, []);
 
   return { state, update, hydrated };
+}
+
+/* ---------- care team helpers ---------- */
+
+export function primaryCaregiver(state: AnimoState): Caregiver {
+  return state.caregivers[0] ?? { id: "cg1", name: state.caregiverName, relation: "Family" };
+}
+
+export function caregiverLabel(c: Caregiver) {
+  return c.relation ? `${c.name} (${c.relation.toLowerCase()})` : c.name;
+}
+
+export function caregiverNames(state: AnimoState) {
+  const names = state.caregivers.map((c) => c.name);
+  if (names.length <= 1) return names[0] ?? state.caregiverName;
+  return `${names.slice(0, -1).join(", ")} and ${names[names.length - 1]}`;
 }
 
 /* ---------- derived adherence helpers ---------- */
