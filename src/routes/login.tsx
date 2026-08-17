@@ -2,7 +2,7 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { AppShell, BigCard } from "@/components/AppShell";
 import { BigButton } from "@/components/BigButton";
-import { useAnimo } from "@/lib/animo";
+import { uid, useAnimo } from "@/lib/animo";
 
 export const Route = createFileRoute("/login")({
   head: () => ({
@@ -20,7 +20,9 @@ function LoginPage() {
   const { update } = useAnimo();
   const navigate = useNavigate();
   const [name, setName] = useState("");
-  const [caregiver, setCaregiver] = useState("");
+  const [caregivers, setCaregivers] = useState<{ name: string; relation: string }[]>([
+    { name: "", relation: "" },
+  ]);
 
   return (
     <AppShell
@@ -42,16 +44,38 @@ function LoginPage() {
           />
         </div>
         <div>
-          <label htmlFor="caregiver" className="mb-2 block text-xl font-semibold">
-            Who should we share good news with?
-          </label>
-          <input
-            id="caregiver"
-            value={caregiver}
-            onChange={(e) => setCaregiver(e.target.value)}
-            placeholder="Maria, my daughter"
-            className="min-h-16 w-full rounded-2xl border-2 border-input bg-background px-5 text-2xl placeholder:text-muted-foreground"
-          />
+          <span className="mb-2 block text-xl font-semibold">Who should we share good news with?</span>
+          <div className="space-y-3">
+            {caregivers.map((c, i) => (
+              <div key={i} className="grid gap-3 sm:grid-cols-2">
+                <input
+                  aria-label={`Care team member ${i + 1} name`}
+                  value={c.name}
+                  onChange={(e) =>
+                    setCaregivers((list) => list.map((x, j) => (j === i ? { ...x, name: e.target.value } : x)))
+                  }
+                  placeholder="Maria"
+                  className="min-h-16 w-full rounded-2xl border-2 border-input bg-background px-5 text-2xl placeholder:text-muted-foreground"
+                />
+                <input
+                  aria-label={`Care team member ${i + 1} relationship`}
+                  value={c.relation}
+                  onChange={(e) =>
+                    setCaregivers((list) => list.map((x, j) => (j === i ? { ...x, relation: e.target.value } : x)))
+                  }
+                  placeholder="Daughter"
+                  className="min-h-16 w-full rounded-2xl border-2 border-input bg-background px-5 text-2xl placeholder:text-muted-foreground"
+                />
+              </div>
+            ))}
+          </div>
+          <button
+            type="button"
+            onClick={() => setCaregivers((list) => [...list, { name: "", relation: "" }])}
+            className="mt-3 min-h-16 w-full rounded-2xl border-2 border-input px-5 text-xl font-semibold"
+          >
+            Add another person
+          </button>
           <p className="mt-2 text-base text-muted-foreground">
             They'll only see whether doses were taken — never your camera or conversations.
           </p>
@@ -62,7 +86,13 @@ function LoginPage() {
               ...s,
               onboarded: true,
               name: name.trim() || s.name,
-              caregiverName: caregiver.trim() || s.caregiverName,
+              caregivers: (() => {
+                const list = caregivers
+                  .filter((c) => c.name.trim())
+                  .map((c) => ({ id: uid(), name: c.name.trim(), relation: c.relation.trim() || "Family" }));
+                return list.length ? list : s.caregivers;
+              })(),
+              caregiverName: caregivers[0]?.name.trim() || s.caregiverName,
             }));
             navigate({ to: "/home" });
           }}
