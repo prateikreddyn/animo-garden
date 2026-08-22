@@ -32,9 +32,9 @@ function Medicines() {
             >
               {taken ? <Check className="size-8" /> : timeLabel[time][0]}
             </div>
-            <div className="flex-1">
-              <h2 className="text-2xl font-semibold">{pill.name}</h2>
-              <p className="text-lg text-muted-foreground">
+            <div className="min-w-0 flex-1">
+              <h2 className="break-words text-2xl font-semibold">{pill.name}</h2>
+              <p className="break-words text-lg text-muted-foreground">
                 {timeLabel[time]} · {pill.dose}
               </p>
             </div>
