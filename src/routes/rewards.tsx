@@ -8,9 +8,9 @@ import { streak, useAnimo, weekAdherence } from "@/lib/animo";
 export const Route = createFileRoute("/rewards")({
   head: () => ({
     meta: [
-      { title: "Your milestones — Animo" },
-      { name: "description", content: "Positive milestones, points and weekly invitations — never streak-loss guilt." },
-      { property: "og:title", content: "Your milestones — Animo" },
+      { title: "Your milestones | Animo" },
+      { name: "description", content: "Positive milestones, points and weekly invitations, never streak-loss guilt." },
+      { property: "og:title", content: "Your milestones | Animo" },
       { property: "og:description", content: "Gentle milestones and weekly invitations, framed as encouragement." },
     ],
   }),
@@ -37,7 +37,7 @@ function Rewards() {
         <p className="text-xl text-muted-foreground">points gathered so far</p>
         <p className="mt-4 text-xl">
           {s > 0
-            ? `${s} day${s === 1 ? "" : "s"} in a row. Keep your streak going — it's a nice one.`
+            ? `${s} day${s === 1 ? "" : "s"} in a row. Keep your streak going, it's a nice one.`
             : "Today is a fresh start, and that's a perfectly good place to begin."}
         </p>
       </BigCard>
@@ -71,9 +71,9 @@ function Rewards() {
               aria-hidden
               className={`size-10 ${m.earned ? "text-primary" : "text-muted-foreground"}`}
             />
-            <div className="flex-1">
-              <h3 className="text-xl font-semibold">{m.label}</h3>
-              <p className="text-base text-muted-foreground">
+            <div className="min-w-0 flex-1">
+              <h3 className="break-words text-xl font-semibold">{m.label}</h3>
+              <p className="break-words text-base text-muted-foreground">
                 {m.earned ? `Earned · +${m.points} points` : "Waiting for you, whenever it happens"}
               </p>
             </div>

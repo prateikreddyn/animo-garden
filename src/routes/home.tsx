@@ -16,9 +16,9 @@ import { companionCopy, companionState, dueToday, streak, useAnimo } from "@/lib
 export const Route = createFileRoute("/home")({
   head: () => ({
     meta: [
-      { title: "Home — Animo" },
+      { title: "Home | Animo" },
       { name: "description", content: "Your day at a glance: today's medicines, your garden, and messages from family." },
-      { property: "og:title", content: "Home — Animo" },
+      { property: "og:title", content: "Home | Animo" },
       { property: "og:description", content: "Today's medicines, your garden companion, and family messages." },
     ],
   }),
@@ -39,7 +39,7 @@ function Home() {
     <main className="min-h-screen pb-16" style={{ background: "var(--gradient-sky)" }}>
       <div className="mx-auto w-full max-w-2xl px-5 pt-8">
         <p className="text-xl text-muted-foreground">{greeting},</p>
-        <h1 className="text-4xl font-semibold">{hydrated ? state.name : "Friend"}</h1>
+        <h1 className="break-words text-4xl font-semibold">{hydrated ? state.name : "Friend"}</h1>
 
         <section className="mt-6 rounded-3xl border border-border bg-card p-6 text-center shadow-[var(--shadow-soft)]">
           <Companion state={cs} size={240} className="mx-auto" />

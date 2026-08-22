@@ -48,7 +48,7 @@ export function VoiceConfirm({
 
       {!supported ? (
         <p className="mt-3 text-lg text-muted-foreground">
-          This browser can't listen yet. Please use the button below instead — it does exactly the same thing.
+          This browser can't listen yet. Please use the button below instead, it does exactly the same thing.
         </p>
       ) : (
         <>
@@ -68,7 +68,7 @@ export function VoiceConfirm({
               : status === "error"
                 ? "The microphone had a hiccup. Tap to try again, or use the button below."
                 : heard === "unclear" && transcript
-                  ? `I heard "${transcript}" — try saying "yes" or "not yet".`
+                  ? `I heard "${transcript}", try saying "yes" or "not yet".`
                   : transcript
                     ? `"${transcript}"`
                     : listening

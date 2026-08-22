@@ -7,9 +7,9 @@ import { dueToday, timeLabel, useAnimo } from "@/lib/animo";
 export const Route = createFileRoute("/reminder")({
   head: () => ({
     meta: [
-      { title: "A gentle reminder — Animo" },
+      { title: "A gentle reminder | Animo" },
       { name: "description", content: "A soft nudge about the next medicine, with a camera scan or a spoken yes." },
-      { property: "og:title", content: "A gentle reminder — Animo" },
+      { property: "og:title", content: "A gentle reminder | Animo" },
       { property: "og:description", content: "Your next dose, whenever you're ready." },
     ],
   }),
@@ -36,11 +36,11 @@ function Reminder() {
     <AppShell title="Whenever you're ready" subtitle="No rush at all.">
       <BigCard className="text-center">
         <Bell aria-hidden className="mx-auto size-16 text-primary" />
-        <h2 className="mt-4 text-3xl font-semibold">{next.pill.name}</h2>
-        <p className="mt-2 text-xl text-muted-foreground">
+        <h2 className="mt-4 break-words text-3xl font-semibold">{next.pill.name}</h2>
+        <p className="mt-2 break-words text-xl text-muted-foreground">
           Your {timeLabel[next.time].toLowerCase()} dose · {next.pill.dose}
         </p>
-        {next.pill.note && <p className="mt-2 text-lg text-muted-foreground">{next.pill.note}</p>}
+        {next.pill.note && <p className="mt-2 break-words text-lg text-muted-foreground">{next.pill.note}</p>}
 
         <div className="mt-8 space-y-4">
           <Link
@@ -55,7 +55,7 @@ function Reminder() {
             search={{ pillId: next.pill.id, time: next.time, mode: "voice" }}
             className="flex min-h-20 w-full items-center justify-center rounded-3xl border border-border bg-card text-2xl font-semibold"
           >
-            Skip the camera — just say yes
+            Skip the camera, just say yes
           </Link>
           <Link
             to="/home"

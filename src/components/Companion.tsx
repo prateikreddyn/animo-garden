@@ -3,7 +3,7 @@ import type { CompanionState } from "@/lib/animo";
 /**
  * A small digital garden: trees, flower beds, greenery and birds.
  * Every state is warm and welcoming.
- * "waiting" is a gentle, resting garden — never wilting, sad or decaying.
+ * "waiting" is a gentle, resting garden, never wilting, sad or decaying.
  */
 export function Companion({
   state,

@@ -7,9 +7,9 @@ import { uid, useAnimo } from "@/lib/animo";
 export const Route = createFileRoute("/login")({
   head: () => ({
     meta: [
-      { title: "Sign in — Animo" },
+      { title: "Sign in | Animo" },
       { name: "description", content: "A simple sign in for Animo, with room for a caregiver to help set things up." },
-      { property: "og:title", content: "Sign in — Animo" },
+      { property: "og:title", content: "Sign in | Animo" },
       { property: "og:description", content: "Simple, caregiver-friendly sign in for Animo." },
     ],
   }),
@@ -77,7 +77,7 @@ function LoginPage() {
             Add another person
           </button>
           <p className="mt-2 text-base text-muted-foreground">
-            They'll only see whether doses were taken — never your camera or conversations.
+            They'll only see whether doses were taken, never your camera or conversations.
           </p>
         </div>
         <BigButton

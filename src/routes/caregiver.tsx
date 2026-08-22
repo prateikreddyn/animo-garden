@@ -8,9 +8,9 @@ import { dueToday, streak, timeLabel, uid, useAnimo, weekAdherence } from "@/lib
 export const Route = createFileRoute("/caregiver")({
   head: () => ({
     meta: [
-      { title: "Caregiver dashboard — Animo" },
+      { title: "Caregiver dashboard | Animo" },
       { name: "description", content: "A calm overview of adherence for family and caregivers, plus a way to send encouragement back." },
-      { property: "og:title", content: "Caregiver dashboard — Animo" },
+      { property: "og:title", content: "Caregiver dashboard | Animo" },
       { property: "og:description", content: "See adherence at a glance and send a warm note back." },
     ],
   }),
@@ -81,17 +81,17 @@ function Caregiver() {
           {due.map((d) => (
             <li
               key={d.pill.id + d.time}
-              className="flex items-center justify-between rounded-2xl bg-secondary px-5 py-4 text-lg"
+              className="flex items-center justify-between gap-4 rounded-2xl bg-secondary px-5 py-4 text-lg"
             >
-              <span>
+              <span className="min-w-0 break-words">
                 {d.pill.name} · {timeLabel[d.time]}
               </span>
-              <span className="font-semibold">{d.taken ? "Taken" : "Still waiting"}</span>
+              <span className="shrink-0 font-semibold">{d.taken ? "Taken" : "Still waiting"}</span>
             </li>
           ))}
         </ul>
         <p className="mt-4 text-base text-muted-foreground">
-          Animo shares only whether a dose was logged — never photos, location or conversations.
+          Animo shares only whether a dose was logged, never photos, location or conversations.
         </p>
       </BigCard>
 
@@ -126,7 +126,7 @@ function Caregiver() {
           value={note}
           onChange={(e) => setNote(e.target.value)}
           rows={3}
-          placeholder="The tulips are blooming — call me after breakfast?"
+          placeholder="The tulips are blooming, call me after breakfast?"
           className="mt-3 w-full rounded-2xl border-2 border-input bg-background p-5 text-xl"
         />
         <div className="mt-4">

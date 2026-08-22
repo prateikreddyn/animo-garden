@@ -7,9 +7,9 @@ import { caregiverNames, uid, useAnimo } from "@/lib/animo";
 export const Route = createFileRoute("/settings")({
   head: () => ({
     meta: [
-      { title: "Settings — Animo" },
+      { title: "Settings | Animo" },
       { name: "description", content: "Text size, spoken confirmations and what your family can see." },
-      { property: "og:title", content: "Settings — Animo" },
+      { property: "og:title", content: "Settings | Animo" },
       { property: "og:description", content: "Text size, voice and privacy choices in Animo." },
     ],
   }),
@@ -66,9 +66,9 @@ function CareTeam() {
       <ul className="mt-4 space-y-3">
         {state.caregivers.map((c) => (
           <li key={c.id} className="flex items-center justify-between gap-4 rounded-2xl bg-secondary px-5 py-4">
-            <span>
-              <span className="block text-xl font-semibold">{c.name}</span>
-              <span className="block text-base text-muted-foreground">
+            <span className="min-w-0">
+              <span className="block break-words text-xl font-semibold">{c.name}</span>
+              <span className="block break-words text-base text-muted-foreground">
                 {c.relation}
                 {c.phone ? ` · ${c.phone}` : ""}
               </span>
@@ -173,7 +173,7 @@ function SettingsPage() {
       <BigCard className="mt-5">
         <h2 className="text-2xl font-semibold">Your privacy</h2>
         <p className="mt-2 text-lg text-muted-foreground">
-          Pill photos stay on this device. {caregiverNames(state)} only ever see whether a dose was logged — no
+          Pill photos stay on this device. {caregiverNames(state)} only ever see whether a dose was logged, no
           photos, no location, no conversations with Animo.
         </p>
       </BigCard>

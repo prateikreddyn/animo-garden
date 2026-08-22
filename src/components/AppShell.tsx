@@ -28,8 +28,8 @@ export function AppShell({
               Back
             </Link>
           )}
-          <h1 className="text-4xl font-semibold text-foreground">{title}</h1>
-          {subtitle && <p className="mt-2 text-xl text-muted-foreground">{subtitle}</p>}
+          <h1 className="break-words text-4xl font-semibold text-foreground">{title}</h1>
+          {subtitle && <p className="mt-2 break-words text-xl text-muted-foreground">{subtitle}</p>}
         </header>
         {children}
       </div>

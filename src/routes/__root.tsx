@@ -78,10 +78,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Animo — A gentle medicine companion" },
+      { title: "Animo: A gentle medicine companion" },
       { name: "description", content: "Animo helps seniors take their medicines with a warm digital garden companion." },
       { name: "author", content: "Animo" },
-      { property: "og:title", content: "Animo — A gentle medicine companion" },
+      { property: "og:title", content: "Animo: A gentle medicine companion" },
       { property: "og:description", content: "A warm companion app for medication adherence." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

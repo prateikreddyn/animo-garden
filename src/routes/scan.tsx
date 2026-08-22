@@ -29,9 +29,9 @@ export const Route = createFileRoute("/scan")({
   }),
   head: () => ({
     meta: [
-      { title: "Check your pill — Animo" },
+      { title: "Check your pill | Animo" },
       { name: "description", content: "Hold your pill up to the camera so Animo can check it's the right one." },
-      { property: "og:title", content: "Check your pill — Animo" },
+      { property: "og:title", content: "Check your pill | Animo" },
       { property: "og:description", content: "A calm camera check before you take your dose." },
     ],
   }),
@@ -162,7 +162,7 @@ function Scan() {
 
   if (stage === "mismatch") {
     return (
-      <AppShell title="Let's double-check" back="/medicines" subtitle="No harm done — this happens often.">
+      <AppShell title="Let's double-check" back="/medicines" subtitle="No harm done, this happens often.">
         <BigCard className="space-y-6">
           <div className="flex items-start gap-4 rounded-3xl bg-secondary p-5">
             <HelpCircle aria-hidden className="size-10 shrink-0 text-primary" />
@@ -201,8 +201,8 @@ function Scan() {
       <AppShell title="That looks right" back="/medicines">
         <BigCard className="text-center">
           <CheckCircle2 aria-hidden className="mx-auto size-20 text-primary" />
-          <h2 className="mt-3 text-3xl font-semibold">{pill.name}</h2>
-          <p className="mt-2 text-xl text-muted-foreground">
+          <h2 className="mt-3 break-words text-3xl font-semibold">{pill.name}</h2>
+          <p className="mt-2 break-words text-xl text-muted-foreground">
             Your {timeLabel[time].toLowerCase()} dose · {pill.dose}
           </p>
           {mode !== "voice" && score > 0 && (
