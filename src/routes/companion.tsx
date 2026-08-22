@@ -44,11 +44,9 @@ function CompanionPage() {
       </BigCard>
 
       <div className="mt-5 space-y-4">
-        <BigLink to="/reminder" tone="primary">
-          Take a medicine
-        </BigLink>
         <BigLink to="/chat">Chat with Animo</BigLink>
       </div>
+
 
       <p className="mt-6 text-center text-base text-muted-foreground">
         Your garden never wilts. On quieter days it simply waits, and brightens the moment you return.
