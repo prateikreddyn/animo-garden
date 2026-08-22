@@ -4,6 +4,7 @@ import { AppShell, BigCard } from "@/components/AppShell";
 import { BigLink } from "@/components/BigButton";
 import { streak, useAnimo, weekAdherence } from "@/lib/animo";
 
+
 export const Route = createFileRoute("/rewards")({
   head: () => ({
     meta: [
