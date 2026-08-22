@@ -201,8 +201,8 @@ function Scan() {
       <AppShell title="That looks right" back="/medicines">
         <BigCard className="text-center">
           <CheckCircle2 aria-hidden className="mx-auto size-20 text-primary" />
-          <h2 className="mt-3 text-3xl font-semibold">{pill.name}</h2>
-          <p className="mt-2 text-xl text-muted-foreground">
+          <h2 className="mt-3 break-words text-3xl font-semibold">{pill.name}</h2>
+          <p className="mt-2 break-words text-xl text-muted-foreground">
             Your {timeLabel[time].toLowerCase()} dose · {pill.dose}
           </p>
           {mode !== "voice" && score > 0 && (

@@ -30,12 +30,12 @@ function Family() {
           <BigCard key={m.id}>
             <div className="flex items-center gap-3">
               <Heart aria-hidden className="size-7 text-bloom" />
-              <h2 className="text-xl font-semibold">{m.from}</h2>
+              <h2 className="min-w-0 break-words text-xl font-semibold">{m.from}</h2>
             </div>
             {m.photo && (
               <img src={m.photo} alt={`Photo from ${m.from}`} className="mt-4 w-full rounded-2xl" />
             )}
-            <p className="mt-3 text-xl leading-relaxed">{m.text}</p>
+            <p className="mt-3 break-words text-xl leading-relaxed">{m.text}</p>
             <p className="mt-2 text-base text-muted-foreground">
               {new Date(m.at).toLocaleString(undefined, {
                 weekday: "long",

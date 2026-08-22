@@ -71,9 +71,9 @@ function Rewards() {
               aria-hidden
               className={`size-10 ${m.earned ? "text-primary" : "text-muted-foreground"}`}
             />
-            <div className="flex-1">
-              <h3 className="text-xl font-semibold">{m.label}</h3>
-              <p className="text-base text-muted-foreground">
+            <div className="min-w-0 flex-1">
+              <h3 className="break-words text-xl font-semibold">{m.label}</h3>
+              <p className="break-words text-base text-muted-foreground">
                 {m.earned ? `Earned · +${m.points} points` : "Waiting for you, whenever it happens"}
               </p>
             </div>

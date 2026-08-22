@@ -66,9 +66,9 @@ function CareTeam() {
       <ul className="mt-4 space-y-3">
         {state.caregivers.map((c) => (
           <li key={c.id} className="flex items-center justify-between gap-4 rounded-2xl bg-secondary px-5 py-4">
-            <span>
-              <span className="block text-xl font-semibold">{c.name}</span>
-              <span className="block text-base text-muted-foreground">
+            <span className="min-w-0">
+              <span className="block break-words text-xl font-semibold">{c.name}</span>
+              <span className="block break-words text-base text-muted-foreground">
                 {c.relation}
                 {c.phone ? ` · ${c.phone}` : ""}
               </span>

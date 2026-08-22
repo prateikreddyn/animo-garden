@@ -81,12 +81,12 @@ function Caregiver() {
           {due.map((d) => (
             <li
               key={d.pill.id + d.time}
-              className="flex items-center justify-between rounded-2xl bg-secondary px-5 py-4 text-lg"
+              className="flex items-center justify-between gap-4 rounded-2xl bg-secondary px-5 py-4 text-lg"
             >
-              <span>
+              <span className="min-w-0 break-words">
                 {d.pill.name} · {timeLabel[d.time]}
               </span>
-              <span className="font-semibold">{d.taken ? "Taken" : "Still waiting"}</span>
+              <span className="shrink-0 font-semibold">{d.taken ? "Taken" : "Still waiting"}</span>
             </li>
           ))}
         </ul>

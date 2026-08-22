@@ -79,7 +79,7 @@ function Chat() {
         {state.chat.map((m) => (
           <div
             key={m.id}
-            className={`max-w-[92%] rounded-3xl p-5 text-xl leading-relaxed shadow-[var(--shadow-soft)] ${
+            className={`max-w-[92%] break-words rounded-3xl p-5 text-xl leading-relaxed shadow-[var(--shadow-soft)] ${
               m.role === "user"
                 ? "ml-auto bg-primary text-primary-foreground"
                 : "bg-card text-card-foreground"
