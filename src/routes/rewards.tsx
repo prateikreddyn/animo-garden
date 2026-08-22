@@ -80,11 +80,6 @@ function Rewards() {
         ))}
       </div>
 
-      <div className="mt-6">
-        <BigLink to="/reminder" tone="primary">
-          Take a medicine
-        </BigLink>
-      </div>
     </AppShell>
   );
 }
