@@ -29,9 +29,9 @@ export const Route = createFileRoute("/scan")({
   }),
   head: () => ({
     meta: [
-      { title: "Check your pill — Animo" },
+      { title: "Check your pill | Animo" },
       { name: "description", content: "Hold your pill up to the camera so Animo can check it's the right one." },
-      { property: "og:title", content: "Check your pill — Animo" },
+      { property: "og:title", content: "Check your pill | Animo" },
       { property: "og:description", content: "A calm camera check before you take your dose." },
     ],
   }),
@@ -162,7 +162,7 @@ function Scan() {
 
   if (stage === "mismatch") {
     return (
-      <AppShell title="Let's double-check" back="/medicines" subtitle="No harm done — this happens often.">
+      <AppShell title="Let's double-check" back="/medicines" subtitle="No harm done, this happens often.">
         <BigCard className="space-y-6">
           <div className="flex items-start gap-4 rounded-3xl bg-secondary p-5">
             <HelpCircle aria-hidden className="size-10 shrink-0 text-primary" />

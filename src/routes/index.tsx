@@ -4,13 +4,13 @@ import { Companion } from "@/components/Companion";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Animo — A gentle companion for your medicines" },
+      { title: "Animo: A gentle companion for your medicines" },
       {
         name: "description",
         content:
           "Animo helps you take your medicines with a warm digital garden companion, simple pill scanning, and messages from family.",
       },
-      { property: "og:title", content: "Animo — A gentle companion for your medicines" },
+      { property: "og:title", content: "Animo: A gentle companion for your medicines" },
       {
         property: "og:description",
         content: "Scan your pill, take your dose, and watch your garden thrive. Made for seniors.",
@@ -30,7 +30,7 @@ function Welcome() {
         <Companion state="thriving" size={300} className="mx-auto" />
         <h1 className="mt-4 text-5xl font-semibold text-foreground">Animo</h1>
         <p className="mt-4 text-2xl leading-relaxed text-muted-foreground">
-          A quiet little garden that keeps you company — and remembers your medicines with you.
+          A quiet little garden that keeps you company, and remembers your medicines with you.
         </p>
 
         <ol className="mx-auto mt-8 space-y-4 text-left text-xl">

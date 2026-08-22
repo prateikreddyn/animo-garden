@@ -7,9 +7,9 @@ import { companionCopy, companionState, dueToday, streak, useAnimo } from "@/lib
 export const Route = createFileRoute("/companion")({
   head: () => ({
     meta: [
-      { title: "Your garden — Animo" },
+      { title: "Your garden | Animo" },
       { name: "description", content: "A warm little garden that brightens when you take your medicines and rests gently when it's waiting." },
-      { property: "og:title", content: "Your garden — Animo" },
+      { property: "og:title", content: "Your garden | Animo" },
       { property: "og:description", content: "Your companion's state, always kind, never scolding." },
     ],
   }),

@@ -7,9 +7,9 @@ import { dueToday, timeLabel, useAnimo } from "@/lib/animo";
 export const Route = createFileRoute("/reminder")({
   head: () => ({
     meta: [
-      { title: "A gentle reminder — Animo" },
+      { title: "A gentle reminder | Animo" },
       { name: "description", content: "A soft nudge about the next medicine, with a camera scan or a spoken yes." },
-      { property: "og:title", content: "A gentle reminder — Animo" },
+      { property: "og:title", content: "A gentle reminder | Animo" },
       { property: "og:description", content: "Your next dose, whenever you're ready." },
     ],
   }),
@@ -55,7 +55,7 @@ function Reminder() {
             search={{ pillId: next.pill.id, time: next.time, mode: "voice" }}
             className="flex min-h-20 w-full items-center justify-center rounded-3xl border border-border bg-card text-2xl font-semibold"
           >
-            Skip the camera — just say yes
+            Skip the camera, just say yes
           </Link>
           <Link
             to="/home"

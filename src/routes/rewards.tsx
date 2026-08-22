@@ -8,9 +8,9 @@ import { streak, useAnimo, weekAdherence } from "@/lib/animo";
 export const Route = createFileRoute("/rewards")({
   head: () => ({
     meta: [
-      { title: "Your milestones — Animo" },
-      { name: "description", content: "Positive milestones, points and weekly invitations — never streak-loss guilt." },
-      { property: "og:title", content: "Your milestones — Animo" },
+      { title: "Your milestones | Animo" },
+      { name: "description", content: "Positive milestones, points and weekly invitations, never streak-loss guilt." },
+      { property: "og:title", content: "Your milestones | Animo" },
       { property: "og:description", content: "Gentle milestones and weekly invitations, framed as encouragement." },
     ],
   }),
@@ -37,7 +37,7 @@ function Rewards() {
         <p className="text-xl text-muted-foreground">points gathered so far</p>
         <p className="mt-4 text-xl">
           {s > 0
-            ? `${s} day${s === 1 ? "" : "s"} in a row. Keep your streak going — it's a nice one.`
+            ? `${s} day${s === 1 ? "" : "s"} in a row. Keep your streak going, it's a nice one.`
             : "Today is a fresh start, and that's a perfectly good place to begin."}
         </p>
       </BigCard>

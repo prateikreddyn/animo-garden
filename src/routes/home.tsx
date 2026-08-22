@@ -16,9 +16,9 @@ import { companionCopy, companionState, dueToday, streak, useAnimo } from "@/lib
 export const Route = createFileRoute("/home")({
   head: () => ({
     meta: [
-      { title: "Home — Animo" },
+      { title: "Home | Animo" },
       { name: "description", content: "Your day at a glance: today's medicines, your garden, and messages from family." },
-      { property: "og:title", content: "Home — Animo" },
+      { property: "og:title", content: "Home | Animo" },
       { property: "og:description", content: "Today's medicines, your garden companion, and family messages." },
     ],
   }),

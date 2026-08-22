@@ -6,9 +6,9 @@ import { dueToday, timeLabel, useAnimo } from "@/lib/animo";
 export const Route = createFileRoute("/medicines")({
   head: () => ({
     meta: [
-      { title: "Today's medicines — Animo" },
+      { title: "Today's medicines | Animo" },
       { name: "description", content: "A calm list of the medicines planned for today, with what's already been taken." },
-      { property: "og:title", content: "Today's medicines — Animo" },
+      { property: "og:title", content: "Today's medicines | Animo" },
       { property: "og:description", content: "See what's planned for today and what's already done." },
     ],
   }),

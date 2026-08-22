@@ -7,9 +7,9 @@ import { caregiverLabel, useAnimo } from "@/lib/animo";
 export const Route = createFileRoute("/family")({
   head: () => ({
     meta: [
-      { title: "Family messages — Animo" },
+      { title: "Family messages | Animo" },
       { name: "description", content: "Short notes and photos from the people who love you, kept in one calm place." },
-      { property: "og:title", content: "Family messages — Animo" },
+      { property: "og:title", content: "Family messages | Animo" },
       { property: "og:description", content: "Notes and photos from family, in one calm place." },
     ],
   }),

@@ -14,9 +14,9 @@ import {
 export const Route = createFileRoute("/add-pill")({
   head: () => ({
     meta: [
-      { title: "Add a pill — Animo" },
+      { title: "Add a pill | Animo" },
       { name: "description", content: "Register a medicine with a reference photo and simple details so Animo can check it later." },
-      { property: "og:title", content: "Add a pill — Animo" },
+      { property: "og:title", content: "Add a pill | Animo" },
       { property: "og:description", content: "Register a medicine with a photo and simple details." },
     ],
   }),
@@ -77,7 +77,7 @@ function AddPill() {
             id="pdose"
             value={dose}
             onChange={(e) => setDose(e.target.value)}
-            placeholder="10 mg — one tablet"
+            placeholder="10 mg, one tablet"
             className="min-h-16 w-full rounded-2xl border-2 border-input bg-background px-5 text-2xl placeholder:text-muted-foreground"
           />
         </div>
@@ -136,7 +136,7 @@ function AddPill() {
             {photo ? "Take a different photo" : "Take a photo"}
           </BigButton>
           <p className="mt-2 text-base text-muted-foreground">
-            You can skip this — Animo will simply ask you to confirm by voice instead.
+            You can skip this | Animo will simply ask you to confirm by voice instead.
           </p>
         </div>
 
