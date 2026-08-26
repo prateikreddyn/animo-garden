@@ -23,7 +23,7 @@ function Medicines() {
     <AppShell title="Today's medicines" subtitle="Take them in any order that suits you.">
       <div className="space-y-4">
         {due.map(({ pill, time, taken }) => (
-          <BigCard key={pill.id + time} className="flex items-center gap-5">
+          <BigCard key={pill.id + time} className="flex flex-wrap items-center gap-4">
             <div
               className={`flex size-16 shrink-0 items-center justify-center rounded-2xl text-xl font-bold ${
                 taken ? "bg-primary text-primary-foreground" : "bg-secondary text-secondary-foreground"
@@ -32,7 +32,7 @@ function Medicines() {
             >
               {taken ? <Check className="size-8" /> : timeLabel[time][0]}
             </div>
-            <div className="min-w-0 flex-1">
+            <div className="min-w-[10rem] flex-1 basis-48">
               <h2 className="break-words text-2xl font-semibold">{pill.name}</h2>
               <p className="break-words text-lg text-muted-foreground">
                 {timeLabel[time]} · {pill.dose}
@@ -44,7 +44,7 @@ function Medicines() {
               <Link
                 to="/scan"
                 search={{ pillId: pill.id, time }}
-                className="min-h-16 rounded-2xl bg-primary px-6 py-4 text-xl font-semibold text-primary-foreground"
+                className="min-h-16 rounded-2xl bg-primary px-6 py-4 text-center text-xl font-semibold text-primary-foreground max-sm:flex-1"
               >
                 Take
               </Link>
