@@ -1,9 +1,21 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Send } from "lucide-react";
-import { useState } from "react";
+import { Camera, Send, Video, X } from "lucide-react";
+import { useRef, useState } from "react";
 import { AppShell, BigCard } from "@/components/AppShell";
 import { BigButton } from "@/components/BigButton";
 import { dueToday, streak, timeLabel, uid, useAnimo, weekAdherence } from "@/lib/animo";
+
+const MAX_BYTES = 4 * 1024 * 1024;
+
+function readFileAsDataUrl(file: File) {
+  return new Promise<string>((resolve, reject) => {
+    const fr = new FileReader();
+    fr.onload = () => resolve(String(fr.result));
+    fr.onerror = () => reject(new Error("read failed"));
+    fr.readAsDataURL(file);
+  });
+}
+
 
 export const Route = createFileRoute("/caregiver")({
   head: () => ({
