@@ -29,9 +29,9 @@ export function BigLink({
   return (
     <Link to={to} className={`${base} ${tones[tone]}`} {...(rest as object)}>
       {icon && <span aria-hidden className="shrink-0">{icon}</span>}
-      <span>
-        <span className="block">{children}</span>
-        {hint && <span className="block text-base font-normal opacity-80">{hint}</span>}
+      <span className="min-w-0 flex-1">
+        <span className="block break-words">{children}</span>
+        {hint && <span className="block break-words text-base font-normal opacity-80">{hint}</span>}
       </span>
     </Link>
   );
@@ -53,9 +53,9 @@ export function BigButton({
   return (
     <button className={`${base} ${tones[tone]} ${className}`} {...rest}>
       {icon && <span aria-hidden className="shrink-0">{icon}</span>}
-      <span>
-        <span className="block">{children}</span>
-        {hint && <span className="block text-base font-normal opacity-80">{hint}</span>}
+      <span className="min-w-0 flex-1">
+        <span className="block break-words">{children}</span>
+        {hint && <span className="block break-words text-base font-normal opacity-80">{hint}</span>}
       </span>
     </button>
   );
