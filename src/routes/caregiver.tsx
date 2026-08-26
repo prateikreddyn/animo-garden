@@ -37,9 +37,36 @@ function Caregiver() {
   const [note, setNote] = useState("");
   const [sent, setSent] = useState(false);
   const [senderId, setSenderId] = useState<string | null>(null);
+  const [photo, setPhoto] = useState<string | null>(null);
+  const [video, setVideo] = useState<string | null>(null);
+  const [mediaError, setMediaError] = useState<string | null>(null);
+  const photoRef = useRef<HTMLInputElement>(null);
+  const videoRef = useRef<HTMLInputElement>(null);
   const sender = state.caregivers.find((c) => c.id === senderId) ?? state.caregivers[0];
 
+  const pickMedia = async (file: File | undefined, kind: "photo" | "video") => {
+    if (!file) return;
+    setSent(false);
+    if (file.size > MAX_BYTES) {
+      setMediaError(
+        kind === "video"
+          ? "That clip is a bit large. Please share a short video under 4 MB."
+          : "That photo is a bit large. Please pick one under 4 MB.",
+      );
+      return;
+    }
+    try {
+      const url = await readFileAsDataUrl(file);
+      setMediaError(null);
+      if (kind === "photo") setPhoto(url);
+      else setVideo(url);
+    } catch {
+      setMediaError("Sorry, that file could not be read. Try another one.");
+    }
+  };
+
   const avg = Math.round(week.reduce((a, d) => a + d.pct, 0) / (week.length || 1));
+
 
   return (
     <AppShell title="Caregiver view" subtitle={`How things are going for ${state.name}.`} wide>
