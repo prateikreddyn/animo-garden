@@ -38,7 +38,8 @@ function Home() {
   return (
     <main className="min-h-screen pb-16" style={{ background: "var(--gradient-sky)" }}>
       <div className="mx-auto w-full max-w-2xl px-5 pt-8">
-        <p className="text-xl text-muted-foreground">{greeting},</p>
+        <p className="text-xl text-muted-foreground">{hydrated ? greeting : "Hello"},</p>
+
         <h1 className="break-words text-4xl font-semibold">{hydrated ? state.name : "Friend"}</h1>
 
         <section className="mt-6 rounded-3xl border border-border bg-card p-6 text-center shadow-[var(--shadow-soft)]">

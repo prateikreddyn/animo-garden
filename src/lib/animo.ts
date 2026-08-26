@@ -26,9 +26,11 @@ export type FamilyMessage = {
   from: string;
   text: string;
   photo?: string;
+  video?: string;
   at: number;
   read?: boolean;
 };
+
 
 export type Caregiver = {
   id: string;

@@ -35,7 +35,17 @@ function Family() {
             {m.photo && (
               <img src={m.photo} alt={`Photo from ${m.from}`} className="mt-4 w-full rounded-2xl" />
             )}
-            <p className="mt-3 break-words text-xl leading-relaxed">{m.text}</p>
+            {m.video && (
+              <video
+                src={m.video}
+                controls
+                playsInline
+                className="mt-4 w-full rounded-2xl bg-secondary"
+                aria-label={`Video from ${m.from}`}
+              />
+            )}
+            {m.text && <p className="mt-3 break-words text-xl leading-relaxed">{m.text}</p>}
+
             <p className="mt-2 text-base text-muted-foreground">
               {new Date(m.at).toLocaleString(undefined, {
                 weekday: "long",
