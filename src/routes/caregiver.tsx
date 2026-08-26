@@ -168,25 +168,104 @@ function Caregiver() {
           placeholder="The tulips are blooming, call me after breakfast?"
           className="mt-3 w-full rounded-2xl border-2 border-input bg-background p-5 text-xl"
         />
+        <input
+          ref={photoRef}
+          type="file"
+          accept="image/*"
+          capture="user"
+          className="sr-only"
+          onChange={(e) => {
+            void pickMedia(e.target.files?.[0], "photo");
+            e.target.value = "";
+          }}
+        />
+        <input
+          ref={videoRef}
+          type="file"
+          accept="video/*"
+          capture="user"
+          className="sr-only"
+          onChange={(e) => {
+            void pickMedia(e.target.files?.[0], "video");
+            e.target.value = "";
+          }}
+        />
+
+        <div className="mt-4 grid gap-3 sm:grid-cols-2">
+          <BigButton tone="soft" icon={<Camera className="size-7" />} onClick={() => photoRef.current?.click()}>
+            {photo ? "Change selfie" : "Add a selfie or photo"}
+          </BigButton>
+          <BigButton tone="soft" icon={<Video className="size-7" />} onClick={() => videoRef.current?.click()}>
+            {video ? "Change video" : "Add a short video"}
+          </BigButton>
+        </div>
+
+        {mediaError && (
+          <p className="mt-3 text-lg text-muted-foreground" role="status">
+            {mediaError}
+          </p>
+        )}
+
+        {(photo || video) && (
+          <div className="mt-4 grid gap-4 sm:grid-cols-2">
+            {photo && (
+              <figure className="relative overflow-hidden rounded-2xl bg-secondary">
+                <img src={photo} alt="Photo you are about to send" className="w-full" />
+                <button
+                  type="button"
+                  onClick={() => setPhoto(null)}
+                  aria-label="Remove photo"
+                  className="absolute right-3 top-3 flex size-12 items-center justify-center rounded-full bg-background text-foreground shadow"
+                >
+                  <X className="size-6" />
+                </button>
+              </figure>
+            )}
+            {video && (
+              <figure className="relative overflow-hidden rounded-2xl bg-secondary">
+                <video src={video} controls playsInline className="w-full" />
+                <button
+                  type="button"
+                  onClick={() => setVideo(null)}
+                  aria-label="Remove video"
+                  className="absolute right-3 top-3 flex size-12 items-center justify-center rounded-full bg-background text-foreground shadow"
+                >
+                  <X className="size-6" />
+                </button>
+              </figure>
+            )}
+          </div>
+        )}
+
         <div className="mt-4">
           <BigButton
             icon={<Send className="size-7" />}
             onClick={() => {
-              if (!note.trim()) return;
-              update((s) => ({
-                ...s,
-                points: s.points + 5,
-                messages: [
-                  {
-                    id: uid(),
-                    from: sender ? `${sender.name} (${sender.relation.toLowerCase()})` : `${s.caregiverName} (family)`,
-                    text: note.trim(),
-                    at: Date.now(),
-                  },
-                  ...s.messages,
-                ],
-              }));
+              if (!note.trim() && !photo && !video) return;
+              try {
+                update((s) => ({
+                  ...s,
+                  points: s.points + 5,
+                  messages: [
+                    {
+                      id: uid(),
+                      from: sender ? `${sender.name} (${sender.relation.toLowerCase()})` : `${s.caregiverName} (family)`,
+                      text: note.trim(),
+                      ...(photo ? { photo } : {}),
+                      ...(video ? { video } : {}),
+                      at: Date.now(),
+                    },
+                    ...s.messages,
+                  ],
+                }));
+              } catch {
+                setMediaError("There wasn't room to save that. Try a smaller photo or clip.");
+                return;
+              }
               setNote("");
+              setPhoto(null);
+              setVideo(null);
+              setMediaError(null);
               setSent(true);
             }}
           >
@@ -198,6 +277,7 @@ function Caregiver() {
             Sent. It'll appear in Family messages.
           </p>
         )}
+
       </BigCard>
     </AppShell>
   );
