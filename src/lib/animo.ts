@@ -79,6 +79,7 @@ function daysAgoKey(n: number) {
 
 export const defaultState: AnimoState = {
   onboarded: false,
+  role: "patient",
   name: "Friend",
   caregiverName: "Maria",
   caregivers: [
