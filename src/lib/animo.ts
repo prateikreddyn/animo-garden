@@ -41,8 +41,12 @@ export type Caregiver = {
 
 export type ChatMessage = { id: string; role: "user" | "animo"; text: string; at: number };
 
+export type AccountRole = "patient" | "caregiver";
+
 export type AnimoState = {
   onboarded: boolean;
+  role: AccountRole;
+  activeCaregiverId?: string;
   name: string;
   caregiverName: string;
   caregivers: Caregiver[];
@@ -75,6 +79,7 @@ function daysAgoKey(n: number) {
 
 export const defaultState: AnimoState = {
   onboarded: false,
+  role: "patient",
   name: "Friend",
   caregiverName: "Maria",
   caregivers: [
@@ -185,6 +190,10 @@ export function useAnimo() {
 
 export function primaryCaregiver(state: AnimoState): Caregiver {
   return state.caregivers[0] ?? { id: "cg1", name: state.caregiverName, relation: "Family" };
+}
+
+export function activeCaregiver(state: AnimoState): Caregiver {
+  return state.caregivers.find((c) => c.id === state.activeCaregiverId) ?? primaryCaregiver(state);
 }
 
 export function caregiverLabel(c: Caregiver) {

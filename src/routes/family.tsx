@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Heart, Phone } from "lucide-react";
 import { useEffect } from "react";
 import { AppShell, BigCard } from "@/components/AppShell";
+import { RoleGate } from "@/components/RoleGate";
 import { caregiverLabel, useAnimo } from "@/lib/animo";
 
 export const Route = createFileRoute("/family")({
@@ -13,7 +14,11 @@ export const Route = createFileRoute("/family")({
       { property: "og:description", content: "Notes and photos from family, in one calm place." },
     ],
   }),
-  component: Family,
+  component: () => (
+    <RoleGate allow="patient">
+      <Family />
+    </RoleGate>
+  ),
 });
 
 function Family() {
