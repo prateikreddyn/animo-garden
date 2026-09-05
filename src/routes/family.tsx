@@ -13,7 +13,11 @@ export const Route = createFileRoute("/family")({
       { property: "og:description", content: "Notes and photos from family, in one calm place." },
     ],
   }),
-  component: Family,
+  component: () => (
+    <RoleGate allow="patient">
+      <Family />
+    </RoleGate>
+  ),
 });
 
 function Family() {
