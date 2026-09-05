@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Heart, Phone } from "lucide-react";
 import { useEffect } from "react";
 import { AppShell, BigCard } from "@/components/AppShell";
+import { RoleGate } from "@/components/RoleGate";
 import { caregiverLabel, useAnimo } from "@/lib/animo";
 
 export const Route = createFileRoute("/family")({
