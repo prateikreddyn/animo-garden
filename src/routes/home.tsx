@@ -11,7 +11,7 @@ import {
 } from "lucide-react";
 import { Companion } from "@/components/Companion";
 import { BigLink } from "@/components/BigButton";
-import { companionCopy, companionState, dueToday, streak, useAnimo } from "@/lib/animo";
+import { activeCaregiver, companionCopy, companionState, dueToday, streak, useAnimo } from "@/lib/animo";
 
 export const Route = createFileRoute("/home")({
   head: () => ({
