@@ -27,6 +27,7 @@ export const Route = createFileRoute("/home")({
 
 function Home() {
   const { state, hydrated } = useAnimo();
+  const isCaregiver = hydrated && state.role === "caregiver";
   const due = dueToday(state);
   const left = due.filter((d) => !d.taken).length;
   const cs = companionState(state);
