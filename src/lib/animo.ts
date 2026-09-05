@@ -192,6 +192,10 @@ export function primaryCaregiver(state: AnimoState): Caregiver {
   return state.caregivers[0] ?? { id: "cg1", name: state.caregiverName, relation: "Family" };
 }
 
+export function activeCaregiver(state: AnimoState): Caregiver {
+  return state.caregivers.find((c) => c.id === state.activeCaregiverId) ?? primaryCaregiver(state);
+}
+
 export function caregiverLabel(c: Caregiver) {
   return c.relation ? `${c.name} (${c.relation.toLowerCase()})` : c.name;
 }
