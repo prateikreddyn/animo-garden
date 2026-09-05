@@ -104,7 +104,7 @@ function Chat() {
       </div>
 
       <form
-        className="mt-5 flex gap-3"
+        className="mt-5 flex flex-col gap-3 sm:flex-row"
         onSubmit={(e) => {
           e.preventDefault();
           send(text);
@@ -118,14 +118,15 @@ function Chat() {
           value={text}
           onChange={(e) => setText(e.target.value)}
           placeholder="Say hello…"
-          className="min-h-16 flex-1 rounded-2xl border-2 border-input bg-background px-5 text-xl"
+          className="min-h-16 w-full min-w-0 rounded-2xl border-2 border-input bg-background px-5 text-xl sm:flex-1"
         />
         <button
           type="submit"
           aria-label="Send message"
-          className="flex min-h-16 min-w-16 items-center justify-center rounded-2xl bg-primary text-primary-foreground"
+          className="flex min-h-16 w-full shrink-0 items-center justify-center rounded-2xl bg-primary px-8 text-lg font-semibold text-primary-foreground sm:w-auto sm:min-w-16"
         >
           <Send aria-hidden className="size-7" />
+          <span className="ml-2 sm:sr-only">Send</span>
         </button>
       </form>
     </AppShell>
