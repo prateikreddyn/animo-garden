@@ -118,6 +118,11 @@ function LoginPage() {
                 role: "caregiver",
                 activeCaregiverId: id,
                 name: patientName.trim() || s.name,
+                patients: [
+                  { id: s.patients[0]?.id ?? "pt1", name: patientName.trim() || s.name },
+                  ...s.patients.slice(1),
+                ],
+                activePatientId: s.patients[0]?.id ?? "pt1",
                 caregivers: [
                   {
                     id,
