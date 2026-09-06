@@ -163,6 +163,12 @@ function read(): AnimoState {
       parsed.caregivers = [{ id: "cg1", name: parsed.caregiverName || "Maria", relation: "Family" }];
     }
     parsed.caregiverName = parsed.caregivers[0]!.name;
+    if (!Array.isArray(parsed.patients) || parsed.patients.length === 0) {
+      parsed.patients = [{ id: "pt1", name: parsed.name || "Friend" }];
+    }
+    const active = parsed.patients.find((p) => p.id === parsed.activePatientId) ?? parsed.patients[0]!;
+    parsed.activePatientId = active.id;
+    parsed.name = active.name;
     return parsed;
   } catch {
     return defaultState;
