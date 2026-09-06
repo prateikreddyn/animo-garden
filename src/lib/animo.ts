@@ -43,10 +43,14 @@ export type ChatMessage = { id: string; role: "user" | "animo"; text: string; at
 
 export type AccountRole = "patient" | "caregiver";
 
+export type Patient = { id: string; name: string };
+
 export type AnimoState = {
   onboarded: boolean;
   role: AccountRole;
   activeCaregiverId?: string;
+  activePatientId?: string;
+  patients: Patient[];
   name: string;
   caregiverName: string;
   caregivers: Caregiver[];
@@ -80,6 +84,8 @@ function daysAgoKey(n: number) {
 export const defaultState: AnimoState = {
   onboarded: false,
   role: "patient",
+  activePatientId: "pt1",
+  patients: [{ id: "pt1", name: "Friend" }],
   name: "Friend",
   caregiverName: "Maria",
   caregivers: [
@@ -157,6 +163,12 @@ function read(): AnimoState {
       parsed.caregivers = [{ id: "cg1", name: parsed.caregiverName || "Maria", relation: "Family" }];
     }
     parsed.caregiverName = parsed.caregivers[0]!.name;
+    if (!Array.isArray(parsed.patients) || parsed.patients.length === 0) {
+      parsed.patients = [{ id: "pt1", name: parsed.name || "Friend" }];
+    }
+    const active = parsed.patients.find((p) => p.id === parsed.activePatientId) ?? parsed.patients[0]!;
+    parsed.activePatientId = active.id;
+    parsed.name = active.name;
     return parsed;
   } catch {
     return defaultState;
@@ -194,6 +206,27 @@ export function primaryCaregiver(state: AnimoState): Caregiver {
 
 export function activeCaregiver(state: AnimoState): Caregiver {
   return state.caregivers.find((c) => c.id === state.activeCaregiverId) ?? primaryCaregiver(state);
+}
+
+export function activePatient(state: AnimoState): Patient {
+  return state.patients.find((p) => p.id === state.activePatientId) ?? state.patients[0] ?? { id: "pt1", name: state.name };
+}
+
+/** Name shown for whoever is signed in on this device right now. */
+export function activeProfileName(state: AnimoState) {
+  return state.role === "caregiver" ? activeCaregiver(state).name : activePatient(state).name;
+}
+
+export function selectPatient(s: AnimoState, id: string): AnimoState {
+  const p = s.patients.find((x) => x.id === id);
+  if (!p) return s;
+  return { ...s, role: "patient", activePatientId: p.id, name: p.name };
+}
+
+export function selectCaregiver(s: AnimoState, id: string): AnimoState {
+  const c = s.caregivers.find((x) => x.id === id);
+  if (!c) return s;
+  return { ...s, role: "caregiver", activeCaregiverId: c.id };
 }
 
 export function caregiverLabel(c: Caregiver) {

@@ -24,7 +24,7 @@ export function RoleGate({ allow, children }: { allow: AccountRole; children: Re
         <p className="text-xl leading-relaxed">
           {forCaregiver
             ? "The caregiver view lives in the helper account, where family can follow the week and send a note."
-            : "Family messages live in the account of the person taking the medicines, so their notes stay private."}
+            : "This part of Animo lives in the account of the person taking the medicines, so their notes and conversations stay private."}
         </p>
         <button
           type="button"

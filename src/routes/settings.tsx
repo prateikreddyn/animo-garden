@@ -2,7 +2,15 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { AppShell, BigCard } from "@/components/AppShell";
 import { BigButton } from "@/components/BigButton";
-import { caregiverNames, uid, useAnimo } from "@/lib/animo";
+import {
+  activeCaregiver,
+  activePatient,
+  caregiverNames,
+  selectCaregiver,
+  selectPatient,
+  uid,
+  useAnimo,
+} from "@/lib/animo";
 
 export const Route = createFileRoute("/settings")({
   head: () => ({
@@ -48,6 +56,98 @@ function Toggle({
         />
       </span>
     </button>
+  );
+}
+
+function ProfileButton({
+  name,
+  tag,
+  detail,
+  active,
+  onClick,
+}: {
+  name: string;
+  tag: string;
+  detail?: string;
+  active: boolean;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      aria-pressed={active}
+      onClick={onClick}
+      className={`min-h-20 w-full rounded-3xl border-2 px-6 py-4 text-left ${active ? "border-primary bg-primary text-primary-foreground" : "border-input bg-background"}`}
+    >
+      <span className="flex flex-wrap items-center gap-3">
+        <span className="min-w-0 break-words text-xl font-semibold">{name}</span>
+        <span
+          className={`rounded-full px-3 py-1 text-sm font-semibold ${active ? "bg-primary-foreground/20" : "bg-secondary text-secondary-foreground"}`}
+        >
+          {tag}
+        </span>
+      </span>
+      {detail && <span className="mt-1 block break-words text-base opacity-80">{detail}</span>}
+    </button>
+  );
+}
+
+function Profiles() {
+  const { state, update } = useAnimo();
+  const [newPatient, setNewPatient] = useState("");
+  const current = state.role === "caregiver" ? activeCaregiver(state).name : activePatient(state).name;
+
+  return (
+    <BigCard className="mt-5">
+      <h2 className="text-2xl font-semibold">Who is using this device?</h2>
+      <p className="mt-2 break-words text-lg text-muted-foreground">
+        Signed in as {current}. Tap any name below to switch.
+      </p>
+
+      <div className="mt-4 grid gap-3 sm:grid-cols-2">
+        {state.patients.map((p) => (
+          <ProfileButton
+            key={p.id}
+            name={p.name}
+            tag="Patient"
+            detail="Takes the medicines"
+            active={state.role === "patient" && activePatient(state).id === p.id}
+            onClick={() => update((s) => selectPatient(s, p.id))}
+          />
+        ))}
+        {state.caregivers.map((c) => (
+          <ProfileButton
+            key={c.id}
+            name={c.name}
+            tag="Caregiver"
+            detail={c.relation}
+            active={state.role === "caregiver" && activeCaregiver(state).id === c.id}
+            onClick={() => update((s) => selectCaregiver(s, c.id))}
+          />
+        ))}
+      </div>
+
+      <div className="mt-5 grid gap-3 sm:grid-cols-[1fr_auto]">
+        <input
+          aria-label="Name of another person taking medicines"
+          value={newPatient}
+          onChange={(e) => setNewPatient(e.target.value)}
+          placeholder="Add another person taking medicines"
+          className="min-h-16 w-full rounded-2xl border-2 border-input bg-background px-5 text-xl"
+        />
+        <BigButton
+          tone="soft"
+          onClick={() => {
+            const name = newPatient.trim();
+            if (!name) return;
+            update((s) => ({ ...s, patients: [...s.patients, { id: uid(), name }] }));
+            setNewPatient("");
+          }}
+        >
+          Add patient
+        </BigButton>
+      </div>
+    </BigCard>
   );
 }
 
@@ -168,32 +268,7 @@ function SettingsPage() {
         />
       </div>
 
-      <BigCard className="mt-5">
-        <h2 className="text-2xl font-semibold">Who is using this device?</h2>
-        <p className="mt-2 text-lg text-muted-foreground">
-          Right now this is the{" "}
-          {state.role === "caregiver" ? "helper account" : "account of the person taking medicines"}. You can
-          switch at any time.
-        </p>
-        <div className="mt-4 grid gap-3 sm:grid-cols-2">
-          <button
-            type="button"
-            aria-pressed={state.role === "patient"}
-            onClick={() => update((s) => ({ ...s, role: "patient" }))}
-            className={`min-h-20 rounded-3xl border-2 px-6 text-xl font-semibold ${state.role === "patient" ? "border-primary bg-primary text-primary-foreground" : "border-input bg-background"}`}
-          >
-            I take the medicines
-          </button>
-          <button
-            type="button"
-            aria-pressed={state.role === "caregiver"}
-            onClick={() => update((s) => ({ ...s, role: "caregiver" }))}
-            className={`min-h-20 rounded-3xl border-2 px-6 text-xl font-semibold ${state.role === "caregiver" ? "border-primary bg-primary text-primary-foreground" : "border-input bg-background"}`}
-          >
-            I help someone
-          </button>
-        </div>
-      </BigCard>
+      <Profiles />
 
       <CareTeam />
 
