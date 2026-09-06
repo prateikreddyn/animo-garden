@@ -3,6 +3,7 @@ import { Camera, Send, Video, X } from "lucide-react";
 import { useRef, useState } from "react";
 import { AppShell, BigCard } from "@/components/AppShell";
 import { BigButton } from "@/components/BigButton";
+import { RoleGate } from "@/components/RoleGate";
 import { dueToday, streak, timeLabel, uid, useAnimo, weekAdherence } from "@/lib/animo";
 
 const MAX_BYTES = 4 * 1024 * 1024;
@@ -26,8 +27,16 @@ export const Route = createFileRoute("/caregiver")({
       { property: "og:description", content: "See adherence at a glance and send a warm note back." },
     ],
   }),
-  component: Caregiver,
+  component: CaregiverPage,
 });
+
+function CaregiverPage() {
+  return (
+    <RoleGate allow="caregiver">
+      <Caregiver />
+    </RoleGate>
+  );
+}
 
 function Caregiver() {
   const { state, update } = useAnimo();
