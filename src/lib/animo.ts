@@ -43,10 +43,14 @@ export type ChatMessage = { id: string; role: "user" | "animo"; text: string; at
 
 export type AccountRole = "patient" | "caregiver";
 
+export type Patient = { id: string; name: string };
+
 export type AnimoState = {
   onboarded: boolean;
   role: AccountRole;
   activeCaregiverId?: string;
+  activePatientId?: string;
+  patients: Patient[];
   name: string;
   caregiverName: string;
   caregivers: Caregiver[];
