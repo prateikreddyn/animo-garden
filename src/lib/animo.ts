@@ -208,6 +208,27 @@ export function activeCaregiver(state: AnimoState): Caregiver {
   return state.caregivers.find((c) => c.id === state.activeCaregiverId) ?? primaryCaregiver(state);
 }
 
+export function activePatient(state: AnimoState): Patient {
+  return state.patients.find((p) => p.id === state.activePatientId) ?? state.patients[0] ?? { id: "pt1", name: state.name };
+}
+
+/** Name shown for whoever is signed in on this device right now. */
+export function activeProfileName(state: AnimoState) {
+  return state.role === "caregiver" ? activeCaregiver(state).name : activePatient(state).name;
+}
+
+export function selectPatient(s: AnimoState, id: string): AnimoState {
+  const p = s.patients.find((x) => x.id === id);
+  if (!p) return s;
+  return { ...s, role: "patient", activePatientId: p.id, name: p.name };
+}
+
+export function selectCaregiver(s: AnimoState, id: string): AnimoState {
+  const c = s.caregivers.find((x) => x.id === id);
+  if (!c) return s;
+  return { ...s, role: "caregiver", activeCaregiverId: c.id };
+}
+
 export function caregiverLabel(c: Caregiver) {
   return c.relation ? `${c.name} (${c.relation.toLowerCase()})` : c.name;
 }
