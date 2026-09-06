@@ -3,6 +3,7 @@ import { Send } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { AppShell, BigCard } from "@/components/AppShell";
 import { Companion } from "@/components/Companion";
+import { RoleGate } from "@/components/RoleGate";
 import { companionState, dueToday, speak, streak, uid, useAnimo, type AnimoState } from "@/lib/animo";
 
 export const Route = createFileRoute("/chat")({
@@ -14,8 +15,16 @@ export const Route = createFileRoute("/chat")({
       { property: "og:description", content: "Warm small talk and gentle reminders, never medical advice." },
     ],
   }),
-  component: Chat,
+  component: ChatPage,
 });
+
+function ChatPage() {
+  return (
+    <RoleGate allow="patient">
+      <Chat />
+    </RoleGate>
+  );
+}
 
 const MEDICAL = /(dose|dosage|side effect|symptom|pain|blood pressure|sugar|should i take|prescri|diagnos|doctor|stop taking|double)/i;
 
