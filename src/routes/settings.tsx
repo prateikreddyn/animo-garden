@@ -168,32 +168,7 @@ function SettingsPage() {
         />
       </div>
 
-      <BigCard className="mt-5">
-        <h2 className="text-2xl font-semibold">Who is using this device?</h2>
-        <p className="mt-2 text-lg text-muted-foreground">
-          Right now this is the{" "}
-          {state.role === "caregiver" ? "helper account" : "account of the person taking medicines"}. You can
-          switch at any time.
-        </p>
-        <div className="mt-4 grid gap-3 sm:grid-cols-2">
-          <button
-            type="button"
-            aria-pressed={state.role === "patient"}
-            onClick={() => update((s) => ({ ...s, role: "patient" }))}
-            className={`min-h-20 rounded-3xl border-2 px-6 text-xl font-semibold ${state.role === "patient" ? "border-primary bg-primary text-primary-foreground" : "border-input bg-background"}`}
-          >
-            I take the medicines
-          </button>
-          <button
-            type="button"
-            aria-pressed={state.role === "caregiver"}
-            onClick={() => update((s) => ({ ...s, role: "caregiver" }))}
-            className={`min-h-20 rounded-3xl border-2 px-6 text-xl font-semibold ${state.role === "caregiver" ? "border-primary bg-primary text-primary-foreground" : "border-input bg-background"}`}
-          >
-            I help someone
-          </button>
-        </div>
-      </BigCard>
+      <Profiles />
 
       <CareTeam />
 
