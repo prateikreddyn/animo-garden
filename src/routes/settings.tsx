@@ -171,8 +171,9 @@ function SettingsPage() {
       <BigCard className="mt-5">
         <h2 className="text-2xl font-semibold">Who is using this device?</h2>
         <p className="mt-2 text-lg text-muted-foreground">
-          Right now this is the {state.role === "caregiver" ? "helper account" : "account of the person taking
-          medicines"}. You can switch at any time.
+          Right now this is the{" "}
+          {state.role === "caregiver" ? "helper account" : "account of the person taking medicines"}. You can
+          switch at any time.
         </p>
         <div className="mt-4 grid gap-3 sm:grid-cols-2">
           <button
