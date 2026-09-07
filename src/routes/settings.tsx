@@ -130,6 +130,7 @@ function Profiles() {
               detail="Takes the medicines"
               active={state.role === "patient" && activePatient(state).id === p.id}
               onClick={() => update((s) => selectPatient(s, p.id))}
+              className={state.patients.length > 1 ? "pr-24" : ""}
             />
             {state.patients.length > 1 && (
               <button
