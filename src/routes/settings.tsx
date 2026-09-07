@@ -65,19 +65,21 @@ function ProfileButton({
   detail,
   active,
   onClick,
+  className = "",
 }: {
   name: string;
   tag: string;
   detail?: string;
   active: boolean;
   onClick: () => void;
+  className?: string;
 }) {
   return (
     <button
       type="button"
       aria-pressed={active}
       onClick={onClick}
-      className={`min-h-20 w-full rounded-3xl border-2 px-6 py-4 text-left ${active ? "border-primary bg-primary text-primary-foreground" : "border-input bg-background"}`}
+      className={`min-h-20 w-full rounded-3xl border-2 px-6 py-4 text-left ${active ? "border-primary bg-primary text-primary-foreground" : "border-input bg-background"} ${className}`}
     >
       <span className="flex flex-wrap items-center gap-3">
         <span className="min-w-0 break-words text-xl font-semibold">{name}</span>
