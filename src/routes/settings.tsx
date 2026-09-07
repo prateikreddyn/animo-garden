@@ -204,12 +204,12 @@ function CareTeam() {
                 onClick={() =>
                   update((s) => {
                     const remaining = s.caregivers.filter((x) => x.id !== c.id);
-                    const next = remaining[0];
+                    const next = remaining[0]!;
                     const wasActive = s.activeCaregiverId === c.id;
                     return {
                       ...s,
                       caregivers: remaining,
-                      activeCaregiverId: wasActive ? next?.id : s.activeCaregiverId,
+                      ...(wasActive ? { activeCaregiverId: next.id } : {}),
                     };
                   })
                 }
