@@ -201,7 +201,18 @@ function CareTeam() {
             {state.caregivers.length > 1 && (
               <button
                 type="button"
-                onClick={() => update((s) => ({ ...s, caregivers: s.caregivers.filter((x) => x.id !== c.id) }))}
+                onClick={() =>
+                  update((s) => {
+                    const remaining = s.caregivers.filter((x) => x.id !== c.id);
+                    const next = remaining[0];
+                    const wasActive = s.activeCaregiverId === c.id;
+                    return {
+                      ...s,
+                      caregivers: remaining,
+                      activeCaregiverId: wasActive ? next?.id : s.activeCaregiverId,
+                    };
+                  })
+                }
                 className="min-h-14 rounded-2xl border-2 border-input px-5 text-lg font-semibold"
               >
                 Remove
