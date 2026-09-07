@@ -65,19 +65,21 @@ function ProfileButton({
   detail,
   active,
   onClick,
+  className = "",
 }: {
   name: string;
   tag: string;
   detail?: string;
   active: boolean;
   onClick: () => void;
+  className?: string;
 }) {
   return (
     <button
       type="button"
       aria-pressed={active}
       onClick={onClick}
-      className={`min-h-20 w-full rounded-3xl border-2 px-6 py-4 text-left ${active ? "border-primary bg-primary text-primary-foreground" : "border-input bg-background"}`}
+      className={`min-h-20 w-full rounded-3xl border-2 px-6 py-4 text-left ${active ? "border-primary bg-primary text-primary-foreground" : "border-input bg-background"} ${className}`}
     >
       <span className="flex flex-wrap items-center gap-3">
         <span className="min-w-0 break-words text-xl font-semibold">{name}</span>
@@ -97,6 +99,21 @@ function Profiles() {
   const [newPatient, setNewPatient] = useState("");
   const current = state.role === "caregiver" ? activeCaregiver(state).name : activePatient(state).name;
 
+  const removePatient = (id: string) => {
+    update((s) => {
+      const remaining = s.patients.filter((x) => x.id !== id);
+      const next = remaining[0] ?? s.patients[0]!;
+      const wasActive = s.activePatientId === id;
+      return {
+        ...s,
+        patients: remaining,
+        activePatientId: (wasActive ? next.id : s.activePatientId) ?? next.id,
+        name: wasActive ? next.name : s.name,
+        role: wasActive ? "patient" : s.role,
+      };
+    });
+  };
+
   return (
     <BigCard className="mt-5">
       <h2 className="text-2xl font-semibold">Who is using this device?</h2>
@@ -106,14 +123,25 @@ function Profiles() {
 
       <div className="mt-4 grid gap-3 sm:grid-cols-2">
         {state.patients.map((p) => (
-          <ProfileButton
-            key={p.id}
-            name={p.name}
-            tag="Patient"
-            detail="Takes the medicines"
-            active={state.role === "patient" && activePatient(state).id === p.id}
-            onClick={() => update((s) => selectPatient(s, p.id))}
-          />
+          <div key={p.id} className="relative">
+            <ProfileButton
+              name={p.name}
+              tag="Patient"
+              detail="Takes the medicines"
+              active={state.role === "patient" && activePatient(state).id === p.id}
+              onClick={() => update((s) => selectPatient(s, p.id))}
+              className={state.patients.length > 1 ? "pr-24" : ""}
+            />
+            {state.patients.length > 1 && (
+              <button
+                type="button"
+                onClick={() => removePatient(p.id)}
+                className="absolute right-3 top-3 min-h-10 rounded-xl border-2 border-input bg-background px-4 text-base font-semibold"
+              >
+                Remove
+              </button>
+            )}
+          </div>
         ))}
         {state.caregivers.map((c) => (
           <ProfileButton
@@ -144,7 +172,7 @@ function Profiles() {
             setNewPatient("");
           }}
         >
-          Add patient
+          Add person
         </BigButton>
       </div>
     </BigCard>
@@ -176,7 +204,18 @@ function CareTeam() {
             {state.caregivers.length > 1 && (
               <button
                 type="button"
-                onClick={() => update((s) => ({ ...s, caregivers: s.caregivers.filter((x) => x.id !== c.id) }))}
+                onClick={() =>
+                  update((s) => {
+                    const remaining = s.caregivers.filter((x) => x.id !== c.id);
+                    const next = remaining[0]!;
+                    const wasActive = s.activeCaregiverId === c.id;
+                    return {
+                      ...s,
+                      caregivers: remaining,
+                      ...(wasActive ? { activeCaregiverId: next.id } : {}),
+                    };
+                  })
+                }
                 className="min-h-14 rounded-2xl border-2 border-input px-5 text-lg font-semibold"
               >
                 Remove
