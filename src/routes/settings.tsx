@@ -105,7 +105,7 @@ function Profiles() {
       return {
         ...s,
         patients: remaining,
-        activePatientId: wasActive ? next.id : s.activePatientId,
+        activePatientId: (wasActive ? next.id : s.activePatientId) ?? next.id,
         name: wasActive ? next.name : s.name,
         role: wasActive ? "patient" : s.role,
       };
