@@ -62,6 +62,7 @@ export type AnimoState = {
   largeText: boolean;
   voiceOn: boolean;
   darkMode: boolean;
+  privacyAccepted?: boolean;
 };
 
 const KEY = "animo-state-v1";
